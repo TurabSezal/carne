@@ -11,6 +11,8 @@ import { UserCarModule } from './user-car/user-car.module';
 import { CarPackage } from './entities/car_package.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { UserPost } from './entities/user_post.entity';
+import { PostComment } from './entities/post_comment.entity';
 
 @Module({
   imports: [
@@ -29,7 +31,15 @@ import { UsersModule } from './users/users.module';
         database: configService.get<string>('DATABASE_NAME'),
         logging: configService.get<boolean>('DATABASE_LOGGING'),
         synchronize: configService.get<boolean>('DATABASE_SYNC'),
-        entities: [User, UserCar, CarBrand, CarModel, CarPackage],
+        entities: [
+          User,
+          UserCar,
+          CarBrand,
+          CarModel,
+          CarPackage,
+          UserPost,
+          PostComment,
+        ],
       }),
       inject: [ConfigService],
     }),

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Entity, Column,OneToMany,PrimaryGeneratedColumn } from 'typeorm';
 import { UserCar } from './user_car.entity';
+import { UserPost } from './user_post.entity';
 
 @Entity()
 export class User {
@@ -27,4 +28,13 @@ export class User {
     },
   )
   public userCar: UserCar[];
+
+  @OneToMany(
+    () => UserPost,
+    (userPost) => userPost.user,
+    {
+      eager: false,
+    },
+  )
+  public userPost: UserPost[];
 }

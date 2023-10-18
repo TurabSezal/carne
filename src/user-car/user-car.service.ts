@@ -47,8 +47,12 @@ export class UserCarService {
 
   async create(createUserCarDto:CreateUserCarDto)
   {
-    await this.userCarRepository.save({ ...createUserCarDto})
-    return null;
+    const exist=await this.userCarRepository.findOne({where:{license_plate:createUserCarDto.license_plate}})
+    if (exist==null) {
+      const car =await this.userCarRepository.save({ ...createUserCarDto})
+      return car;
+    }
+    return "License Plate Already Exist";
   }
 
   async update(id:string,updateUserCarDto:CreateUserCarDto){
