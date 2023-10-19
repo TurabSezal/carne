@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Entity, Column,OneToOne,JoinColumn, PrimaryGeneratedColumn} from 'typeorm';
+import { Entity, Column,OneToOne,JoinColumn, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import { User } from './user.entity';
 import { CarBrand } from './car_brand.entity';
 import { CarModel } from './car_model.entity';
@@ -33,7 +33,7 @@ export class UserCar{
  @Column()
  color:string;
 
- @OneToOne(() => User, {
+ @ManyToOne(() => User, {
     eager: false,
   })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })

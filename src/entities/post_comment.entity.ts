@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserPost } from './user_post.entity';
+import { User } from './user.entity';
 
 @Entity()
 export class PostComment {
@@ -9,6 +10,9 @@ export class PostComment {
 
   @Column()
   post_id:string;
+
+  @Column()
+  user_id:string;
 
   @Column()
   comment:string;
@@ -21,4 +25,10 @@ export class PostComment {
   })
   @JoinColumn({ name: 'post_id', referencedColumnName: 'id' })
   public userPost: UserPost;
+
+  @OneToOne(() => User, {
+    eager: false,
+  })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  public user: User;
 }

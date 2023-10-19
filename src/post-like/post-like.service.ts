@@ -15,9 +15,10 @@ export class PostLikeService {
   if (exist!=null) {
    return "already liked";
   }
-  return await this.postLikeRepository.save({
+   await this.postLikeRepository.save({
    user_id: postLike.user_id,
    post_id: postLike.post_id,
   });
+  return "post liked";
  }
 }

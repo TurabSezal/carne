@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserPost } from './user_post.entity';
 import { User } from './user.entity';
 
@@ -14,13 +14,13 @@ export class PostLike {
   @Column()
   user_id: string;
 
-  @OneToOne(() => User, {
+  @ManyToOne(() => User, {
     eager: false,
   })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   public user: User;
 
-  @OneToOne(() => UserPost, {
+  @ManyToOne(() => UserPost, {
     eager: false,
   })
   @JoinColumn({ name: 'post_id', referencedColumnName: 'id' })
