@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsObject, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserPostDto {
  @IsNotEmpty()
@@ -10,6 +10,6 @@ export class CreateUserPostDto {
  description:string;
 
  @IsNotEmpty()
- @IsObject()
- image:Buffer;
+ @IsString()
+ image:string;
 }

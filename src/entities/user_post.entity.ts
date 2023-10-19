@@ -2,6 +2,7 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 import { PostComment } from './post_comment.entity';
+import { PostLike } from './post_like.entity';
 
 @Entity()
 export class UserPost {
@@ -11,14 +12,11 @@ export class UserPost {
   @Column()
   user_id:string;
 
-  @Column({ nullable: true, default: 0 })
-  like:number;
-
-  @Column()
+  @Column({nullable:true})
   description:string;
 
-  @Column({ type: 'bytea' })
-  image: Buffer;
+  @Column()
+  image: string;
 
   @OneToOne(() => User, {
     eager: false,
@@ -34,4 +32,13 @@ export class UserPost {
     },
   )
   public postComment: PostComment[];
+
+  @OneToMany(
+    () => PostLike,
+    (postLike) => postLike.userPost,
+    {
+      eager: false,
+    },
+  )
+  public postLike: PostLike[];
 }

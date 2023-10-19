@@ -13,6 +13,9 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { UserPost } from './entities/user_post.entity';
 import { PostComment } from './entities/post_comment.entity';
+import { PostLike } from './entities/post_like.entity';
+import { PostLikeModule } from './post-like/post-like.module';
+import { UserPostModule } from './user-post/user-post.module';
 
 @Module({
   imports: [
@@ -39,6 +42,7 @@ import { PostComment } from './entities/post_comment.entity';
           CarPackage,
           UserPost,
           PostComment,
+          PostLike,
         ],
       }),
       inject: [ConfigService],
@@ -47,6 +51,8 @@ import { PostComment } from './entities/post_comment.entity';
     AuthModule,
     UsersModule,
     AuthModule,
+    UserPostModule,
+    PostLikeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

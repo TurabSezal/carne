@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Param, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { UserPostService } from './user-post.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UuidInterceptor } from '../helper/uuid.interceptor';
+import { CreateUserPostDto } from './dto/user-post-create.dto';
 
 @UseGuards(AuthGuard)
-@Controller('user-post')
+@Controller('post')
 export class UserPostController {
   constructor(private readonly userPostService: UserPostService) {}
 
@@ -14,4 +15,16 @@ export class UserPostController {
   findOne(@Param('id') id: string) {
     return this.userPostService.findOne(id);
   }
+
+  @UseInterceptors(UuidInterceptor)
+  @Get('/user/:id')
+  findUser(@Param('id') id: string) {
+    return this.userPostService.findUser(id);
+  }
+
+  @Post()
+    createPost(@Body() createUserPostDto: CreateUserPostDto) {
+      return this.userPostService.createPost(createUserPostDto);
+  }
 }
+

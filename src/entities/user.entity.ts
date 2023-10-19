@@ -2,6 +2,7 @@
 import { Entity, Column,OneToMany,PrimaryGeneratedColumn } from 'typeorm';
 import { UserCar } from './user_car.entity';
 import { UserPost } from './user_post.entity';
+import { PostLike } from './post_like.entity';
 
 @Entity()
 export class User {
@@ -37,4 +38,13 @@ export class User {
     },
   )
   public userPost: UserPost[];
+
+  @OneToMany(
+    () => PostLike,
+    (postLike) => postLike.user,
+    {
+      eager: false,
+    },
+  )
+  public postLike: PostLike[];
 }
