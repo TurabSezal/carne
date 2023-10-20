@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserPost } from '../entities/user_post.entity';
 import { CreateUserPostDto } from './dto/user-post-create.dto';
+import { ApiResponse, SuccessResponse } from '../api-response/api-response';
 
 export class UserPostService {
   constructor(
@@ -10,20 +11,20 @@ export class UserPostService {
     private readonly userPostRepository: Repository<UserPost>,
   ) {}
 
-    async createPost(createUserPostDto: CreateUserPostDto) {
+    async createPost(createUserPostDto: CreateUserPostDto):Promise<ApiResponse<any>> {
     this.userPostRepository.save({
       ...createUserPostDto
     });
-    return "user post created";
+    return new SuccessResponse("Post created successfully");
   }
 
-  async findOne(id:string){
+  async findOne(id:string):Promise<ApiResponse<UserPost>>{
    const post=await this.userPostRepository.findOne({where:{id}});
-   return post;
+   return new SuccessResponse(post);
   }
 
-  async findUser(id:string) {
+  async findUser(id:string):Promise<ApiResponse<UserPost[]>> {
     const post =await this.userPostRepository.find({where:{user_id:id}});
-    return post;
+    return new SuccessResponse(post);
   }
 }

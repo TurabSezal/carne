@@ -5,6 +5,12 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
+import {
+  ApiResponse,
+  CreatedResponse,
+  ErrorResponse,
+  SuccessResponse,
+} from '../api-response/api-response';
 
 @Injectable()
 export class AuthService {
@@ -15,17 +21,17 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<ApiResponse<any>> {
     const exist = await this.userRepository.findOne({
       where: { email: createUserDto.email },
     });
     if (exist != null) {
-      return 'Email already exist';
+      return new ErrorResponse(`User exist '${createUserDto.email}'`);
     }
     this.userRepository.save({
       ...createUserDto,
     });
-    return 'User Created';
+    return new CreatedResponse('User created successfully');
   }
   async signIn(email, pass) {
     const user = await this.usersService.findOne(email);
@@ -38,7 +44,7 @@ export class AuthService {
     };
   }
 
-  async getProfile(id: string) {
+  async getProfile(id: string): Promise<ApiResponse<User[]>> {
     const user = await this.userRepository.findOne({ where: { id } });
     const profile = [];
     profile.push({
@@ -48,6 +54,6 @@ export class AuthService {
       lastName: user.last_name,
       password: user.password,
     });
-    return profile;
+    return new SuccessResponse(profile);
   }
 }

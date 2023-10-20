@@ -4,6 +4,8 @@ import { UserPostService } from './user-post.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UuidInterceptor } from '../helper/uuid.interceptor';
 import { CreateUserPostDto } from './dto/user-post-create.dto';
+import { ApiResponse } from '../api-response/api-response';
+import { UserPost } from '../entities/user_post.entity';
 
 @UseGuards(AuthGuard)
 @Controller('post')
@@ -12,13 +14,13 @@ export class UserPostController {
 
   @UseInterceptors(UuidInterceptor)
   @Get('/:id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string):Promise<ApiResponse<UserPost>> {
     return this.userPostService.findOne(id);
   }
 
   @UseInterceptors(UuidInterceptor)
   @Get('/user/:id')
-  findUser(@Param('id') id: string) {
+  findUser(@Param('id') id: string):Promise<ApiResponse<UserPost[]>> {
     return this.userPostService.findUser(id);
   }
 
