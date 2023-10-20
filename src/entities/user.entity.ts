@@ -3,6 +3,7 @@ import { Entity, Column,OneToMany,PrimaryGeneratedColumn } from 'typeorm';
 import { UserCar } from './user_car.entity';
 import { UserPost } from './user_post.entity';
 import { PostLike } from './post_like.entity';
+import { Chat } from './chat.entity';
 
 @Entity()
 export class User {
@@ -47,4 +48,13 @@ export class User {
     },
   )
   public postLike: PostLike[];
+
+  @OneToMany(
+    () => Chat,
+    (chat) => chat.user,
+    {
+      eager: false,
+    },
+  )
+  public chat: Chat[];
 }

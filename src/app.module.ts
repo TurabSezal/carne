@@ -16,6 +16,8 @@ import { PostComment } from './entities/post_comment.entity';
 import { PostLike } from './entities/post_like.entity';
 import { PostLikeModule } from './post-like/post-like.module';
 import { UserPostModule } from './user-post/user-post.module';
+import { ChatModule } from './chat/chat.module';
+import { Chat } from './entities/chat.entity';
 
 @Module({
   imports: [
@@ -43,6 +45,7 @@ import { UserPostModule } from './user-post/user-post.module';
           UserPost,
           PostComment,
           PostLike,
+          Chat,
         ],
       }),
       inject: [ConfigService],
@@ -53,6 +56,7 @@ import { UserPostModule } from './user-post/user-post.module';
     AuthModule,
     UserPostModule,
     PostLikeModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
