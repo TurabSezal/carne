@@ -7,9 +7,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
+import { GlobalEntity } from './global.entity';
 
 @Entity()
-export class Chat {
+export class Chat extends GlobalEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

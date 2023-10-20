@@ -22,4 +22,13 @@ export class PostLikeService {
   });
   return new SuccessResponse("Post liked successfully");
  }
+
+ async delete (postLike: PostLike): Promise<ApiResponse<any>>{
+  const exist=await this.postLikeRepository.findOne({where:{user_id:postLike.user_id,post_id:postLike.post_id}});
+  if (exist==null) {
+   return new ErrorResponse("post not liked");
+  }
+  await this.postLikeRepository.delete({user_id:postLike.user_id,post_id:postLike.post_id});
+  return new SuccessResponse("Post unliked successfully");
+ }
 }

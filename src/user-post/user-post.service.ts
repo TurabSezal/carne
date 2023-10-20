@@ -27,4 +27,13 @@ export class UserPostService {
     const post =await this.userPostRepository.find({where:{user_id:id}});
     return new SuccessResponse(post);
   }
+
+  async delete (id:string):Promise<ApiResponse<any>>{
+    const exist=await this.userPostRepository.findOne({where:{id}});
+    if (exist==null) {
+      return new SuccessResponse("post not found");
+    }
+    await this.userPostRepository.delete({id});
+    return new SuccessResponse("Post deleted successfully");
+  }
 }

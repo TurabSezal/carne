@@ -2,9 +2,10 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserPost } from './user_post.entity';
 import { User } from './user.entity';
+import { GlobalEntity } from './global.entity';
 
 @Entity()
-export class PostLike {
+export class PostLike extends GlobalEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

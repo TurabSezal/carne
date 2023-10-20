@@ -4,9 +4,10 @@ import { UserCar } from './user_car.entity';
 import { UserPost } from './user_post.entity';
 import { PostLike } from './post_like.entity';
 import { Chat } from './chat.entity';
+import { GlobalEntity } from './global.entity';
 
 @Entity()
-export class User {
+export class User extends GlobalEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

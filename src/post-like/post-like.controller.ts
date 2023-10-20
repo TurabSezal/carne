@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { PostLike } from './../entities/post_like.entity';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Post } from '@nestjs/common';
 import { PostLikeService } from './post-like.service';
 import { ApiResponse } from '../api-response/api-response';
 
@@ -12,5 +12,10 @@ export class PostLikeController {
  @Post()
  create(@Body() postLike:PostLike):Promise<ApiResponse<any>> {
   return this.postLikeService.create(postLike);
+ }
+
+ @Delete()
+ delete(@Body() postLike:PostLike):Promise<ApiResponse<any>> {
+  return this.postLikeService.delete(postLike);
  }
 }

@@ -2,9 +2,10 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserPost } from './user_post.entity';
 import { User } from './user.entity';
+import { GlobalEntity } from './global.entity';
 
 @Entity()
-export class PostComment {
+export class PostComment extends GlobalEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

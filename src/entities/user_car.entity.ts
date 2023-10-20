@@ -3,9 +3,10 @@ import { Entity, Column,OneToOne,JoinColumn, PrimaryGeneratedColumn, ManyToOne} 
 import { User } from './user.entity';
 import { CarBrand } from './car_brand.entity';
 import { CarModel } from './car_model.entity';
+import { GlobalEntity } from './global.entity';
 
 @Entity()
-export class UserCar{
+export class UserCar extends GlobalEntity{
  @PrimaryGeneratedColumn('uuid')
   id: string;
 

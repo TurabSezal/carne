@@ -3,9 +3,10 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { User } from './user.entity';
 import { PostComment } from './post_comment.entity';
 import { PostLike } from './post_like.entity';
+import { GlobalEntity } from './global.entity';
 
 @Entity()
-export class UserPost {
+export class UserPost extends GlobalEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
