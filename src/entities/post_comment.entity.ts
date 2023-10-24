@@ -1,5 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { UserPost } from './user_post.entity';
 import { User } from './user.entity';
 import { GlobalEntity } from './global.entity';
@@ -10,16 +16,16 @@ export class PostComment extends GlobalEntity {
   id: string;
 
   @Column()
-  post_id:string;
+  post_id: string;
 
   @Column()
-  user_id:string;
+  user_id: string;
 
   @Column()
-  comment:string;
+  comment: string;
 
   @Column({ nullable: true, default: 0 })
-  like:number;
+  like: number;
 
   @OneToOne(() => UserPost, {
     eager: false,

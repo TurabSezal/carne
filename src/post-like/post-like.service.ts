@@ -28,7 +28,7 @@ export class PostLikeService {
   if (exist==null) {
    return new ErrorResponse("post not liked");
   }
-  await this.postLikeRepository.delete({user_id:postLike.user_id,post_id:postLike.post_id});
+  await this.postLikeRepository.softDelete({user_id:postLike.user_id,post_id:postLike.post_id});
   return new SuccessResponse("Post unliked successfully");
  }
 }

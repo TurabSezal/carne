@@ -33,7 +33,7 @@ export class UserPostService {
     if (exist==null) {
       return new SuccessResponse("post not found");
     }
-    await this.userPostRepository.delete({id});
+    await this.userPostRepository.softDelete({id});
     return new SuccessResponse("Post deleted successfully");
   }
 }
